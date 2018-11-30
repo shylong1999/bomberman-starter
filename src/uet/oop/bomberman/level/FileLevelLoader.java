@@ -5,6 +5,7 @@ import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.enemy.Balloon;
+import uet.oop.bomberman.entities.character.enemy.Ghost;
 import uet.oop.bomberman.entities.character.enemy.Oneal;
 import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.Portal;
@@ -38,7 +39,10 @@ public class FileLevelLoader extends LevelLoader {
         // TODO: cập nhật các giá trị đọc được vào _width, _height, _level, _map
 
         try {
-            InputStream inputStream = new FileInputStream("res/levels/level" + level + ".txt");
+            String path = "res/levels/level" + level + ".txt";
+            String abc = "/levels/level"+ level +".txt";
+            InputStream inputStream = new FileInputStream(path);
+            //InputStream inputStream = FileLevelLoader.class.getResourceAsStream(abc);
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
             String data = bufferedReader.readLine();
@@ -105,6 +109,11 @@ public class FileLevelLoader extends LevelLoader {
                         _board.addEntity(xE2 + yE2 * _width, new Grass(xE2, yE2, Sprite.grass));
                         break;
 
+                    case '3':
+                        int xE3 = x,yE3 = y;
+                        _board.addCharacter(new Ghost(Coordinates.tileToPixel(xE3), Coordinates.tileToPixel(yE3) + Game.TILES_SIZE, _board));
+                        _board.addEntity(xE3 + yE3 * _width, new Grass(xE3, yE3, Sprite.grass));
+                        break;
                     // thêm Brick
                     case '*':
                         int xB = x, yB = y;
@@ -117,7 +126,7 @@ public class FileLevelLoader extends LevelLoader {
                         break;
 
                     // thêm Item kèm Brick che phủ ở trên
-                    case 'x':
+                    case 'x': //Portal
                         int xIP = x, yIP = y;
                         _board.addEntity(xIP + yIP * _width,
                                 new LayeredEntity(xIP, yIP,
@@ -128,7 +137,7 @@ public class FileLevelLoader extends LevelLoader {
                         );
                         break;
 
-                    case 'b':
+                    case 'b': //Bomb Item
                         int xIB = x, yIB = y;
                         _board.addEntity(xIB + yIB * _width,
                                 new LayeredEntity(xIB, yIB,
@@ -139,7 +148,7 @@ public class FileLevelLoader extends LevelLoader {
                         );
                         break;
 
-                    case 'f':
+                    case 's': //Speech Item
                         int xIS = x, yIS = y;
                         _board.addEntity(xIS + yIS * _width,
                                 new LayeredEntity(xIS, yIS,
@@ -150,7 +159,7 @@ public class FileLevelLoader extends LevelLoader {
                         );
                         break;
 
-                    case 's':
+                    case 'f': //Flame Item
                         int xIF =x, yIF =y;
                         _board.addEntity(xIF + yIF * _width,
                                 new LayeredEntity(xIF, yIF,
