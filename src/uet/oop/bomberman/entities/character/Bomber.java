@@ -11,6 +11,7 @@ import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.input.Keyboard;
 import uet.oop.bomberman.level.Coordinates;
+import uet.oop.bomberman.sound.GameSound;
 
 import java.util.Iterator;
 import java.util.List;
@@ -31,6 +32,7 @@ public class Bomber extends Character {
         _bombs = _board.getBombs();
         _input = _board.getInput();
         _sprite = Sprite.player_right;
+
     }
 
     @Override
@@ -92,6 +94,7 @@ public class Bomber extends Character {
         // TODO: thực hiện tạo đối tượng bom, đặt vào vị trí (x, y)
         Bomb bomb = new Bomb(x,y,_board);
         _board.addBomb(bomb);
+        GameSound.getIstance().getAudio(GameSound.BOMB).play();
     }
 
     private void clearBombs() {
@@ -110,6 +113,7 @@ public class Bomber extends Character {
 
     @Override
     public void kill() {
+        GameSound.getIstance().getAudio(GameSound.BOMBER_DIE).play();
         if (!_alive) return;
         _alive = false;
     }
@@ -119,6 +123,8 @@ public class Bomber extends Character {
         if (_timeAfter > 0) --_timeAfter;
         else {
             _board.endGame();
+            GameSound.getIstance().getAudio(GameSound.BOMBER_DIE).stop();
+            GameSound.getIstance().getAudio(GameSound.LOSE).play();
         }
     }
 
@@ -186,12 +192,12 @@ public class Bomber extends Character {
 
         if (e instanceof Enemy){
             this.kill();
-            return true;
+            return false;
         }
         return true;
     }
 
-    public boolean handleCollidePortal() {
+    public boolean collidevsPortal() {
         if (_board.detectNoEnemies()) {
             _board.nextLevel();
             return true;

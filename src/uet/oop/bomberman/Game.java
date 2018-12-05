@@ -3,6 +3,7 @@ package uet.oop.bomberman;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.gui.Frame;
 import uet.oop.bomberman.input.Keyboard;
+import uet.oop.bomberman.sound.GameSound;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -99,7 +100,6 @@ public class Game extends Canvas {
 		g.dispose();
 		bs.show();
 	}
-//bật mic
 	private void update() {
 		_input.update();
 		_board.update();
@@ -107,7 +107,6 @@ public class Game extends Canvas {
 	
 	public void start() {
 		_running = true;
-		
 		long  lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
 		final double ns = 1000000000.0 / 60.0; //nanosecond, 60 frames per second

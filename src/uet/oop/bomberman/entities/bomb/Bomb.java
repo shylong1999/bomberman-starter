@@ -10,6 +10,7 @@ import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.level.Coordinates;
+import uet.oop.bomberman.sound.GameSound;
 
 public class Bomb extends AnimatedEntitiy {
 
@@ -92,6 +93,7 @@ public class Bomb extends AnimatedEntitiy {
 
 		}
 		_timeToExplode = 0;
+		GameSound.getIstance().getAudio(GameSound.BONG_BANG).play();
 	}
 	
 	public FlameSegment flameAt(int x, int y) {

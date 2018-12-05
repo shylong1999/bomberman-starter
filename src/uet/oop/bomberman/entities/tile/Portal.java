@@ -17,8 +17,8 @@ public class Portal extends Tile {
 		// TODO: xử lý khi Bomber đi vào
 
 		if (e instanceof Bomber){
-			((Bomber) e).handleCollidePortal();
-			return true;
+			((Bomber) e).collidevsPortal();
+			return false;
 		}
 
 		return false;

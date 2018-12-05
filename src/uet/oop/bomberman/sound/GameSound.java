@@ -8,14 +8,15 @@ public class GameSound {
     public static GameSound instance;
 
     public static final String MENU = "/sound/01_Title Screen.wav";
-    public static final String PLAYGAME = "/sound/playgame.mid";
+    public static final String PLAYGAME = "/sound/02_Stage Start.wav";
+    public static final String PLAY = "/sound/03_Stage Theme.wav";
     public static final String BOMB = "/sound/newbomb.wav";
-    public static final String BOMBER_DIE = "/sound/bomber_die.wav";
+    public static final String BOMBER_DIE = "/sound/08_Life Lost.wav";
     public static final String MONSTER_DIE = "/sound/monster_die.wav";
     public static final String BONG_BANG = "/sound/bomb_bang.wav";
     public static final String ITEM = "/sound/item.wav";
     public static final String WIN = "/sound/win.wav";
-    public static final String LOSE = "/sound/lose.mid";
+    public static final String LOSE = "/sound/09_Game Over.wav";
     private HashMap<String, AudioClip> audioMap;
 
     public GameSound() {
@@ -32,8 +33,10 @@ public class GameSound {
     }
 
     public void loadAllAudio() {
-        putAudio(MENU);;
         putAudio(PLAYGAME);
+        putAudio(PLAY);
+        putAudio(MENU);
+
         putAudio(BOMB);
         putAudio(MONSTER_DIE);
         putAudio(BOMBER_DIE);
@@ -44,8 +47,10 @@ public class GameSound {
     }
 
     public void stop() {
-        getAudio(MENU).stop();
         getAudio(PLAYGAME).stop();
+        getAudio(PLAY).stop();
+        getAudio(MENU).stop();
+
         getAudio(BOMB).stop();
         getAudio(BONG_BANG).stop();
         getAudio(WIN).stop();
@@ -60,4 +65,5 @@ public class GameSound {
     public AudioClip getAudio(String name) {
         return audioMap.get(name);
     }
+
 }

@@ -63,7 +63,7 @@ public class Screen {
 			}
 		}
 	}
-	
+
 	public static void setOffset(int xO, int yO) {
 		xOffset = xO;
 		yOffset = yO;
@@ -108,7 +108,8 @@ public class Screen {
 		g.setFont(font);
 		g.setColor(Color.white);
 		drawCenteredString("LEVEL " + level, getRealWidth(), getRealHeight(), g);
-		
+
+
 	}
 	
 	public void drawPaused(Graphics g) {
@@ -141,4 +142,5 @@ public class Screen {
 	public int getRealHeight() {
 		return _height * Game.SCALE;
 	}
+
 }

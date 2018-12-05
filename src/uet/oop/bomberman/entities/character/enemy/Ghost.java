@@ -55,6 +55,9 @@ public class Ghost extends Enemy {
 
         if (entity instanceof Wall) return false;
         if (entity instanceof Bomb) return false;
+        if (entity instanceof Flame) {
+            return false;
+        }
         if (entity instanceof Bomber){
             ((Bomber) entity).kill();
             return true;
